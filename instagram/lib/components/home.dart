@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       appBar: const CustomAppBAr(),
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(), //physics
+        physics: const ClampingScrollPhysics(), //physics
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Column(

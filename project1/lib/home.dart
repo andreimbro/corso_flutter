@@ -158,7 +158,7 @@ class _HomeState extends State<Home> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(

@@ -30,7 +30,7 @@ class TabV extends StatelessWidget {
           ),
           Expanded(
             child: TabBarView(
-              physics: ClampingScrollPhysics(), //physics
+              physics: const ClampingScrollPhysics(), //physics
               children: [
                 PostGrid(),
                 PostGrid(),

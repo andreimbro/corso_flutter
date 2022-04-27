@@ -25,7 +25,7 @@ class PostGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: ClampingScrollPhysics(), //physics
+      physics: const ClampingScrollPhysics(), //physics
       itemCount: listapost.length,
       gridDelegate:
           const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
