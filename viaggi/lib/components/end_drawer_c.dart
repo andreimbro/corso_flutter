@@ -5,8 +5,11 @@ class EndDrawerC extends StatefulWidget {
   final RangeValues ratingInit;
   final String? countryInit;
   final bool? dispInit;
-  final Function(String input,
-      {RangeValues rating, String? country, bool? disponibile}) prendiValues;
+  final Function(
+      {RangeValues rating,
+      String? country,
+      bool? disponibile,
+      bool reset}) prendiValues;
   const EndDrawerC(
       {required this.prendiValues,
       required this.ratingInit,
@@ -112,7 +115,7 @@ class _EndDrawerCState extends State<EndDrawerC> {
               TextButton(
                   onPressed: () {
                     widget.prendiValues(
-                      "",
+                      reset: true,
                       country: _countrySeleziona,
                       disponibile: _disponibile,
                       rating: _ratingseleziona,

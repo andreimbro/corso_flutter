@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
   final bool home;
-  final Function(String)? callback;
-  const SearchBar({this.callback, this.home = false, Key? key})
+  final TextEditingController? controller;
+  final Function? callback;
+  const SearchBar({this.controller, this.callback, this.home = false, Key? key})
       : super(key: key);
 
   @override
@@ -18,11 +19,14 @@ class SearchBar extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
+              controller: controller,
               autofocus: home ? false : true,
               onTap: () {
                 if (home) Navigator.of(context).pushNamed('/search');
               },
-              onChanged: callback,
+              onChanged: (value) {
+                if (callback != null) callback!();
+              },
               readOnly: home,
               decoration: const InputDecoration(
                   hintText: "Search", border: InputBorder.none),

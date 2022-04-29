@@ -24,9 +24,10 @@ class DrawerC extends StatelessWidget {
               leading: Icon(Icons.home),
               title: Text('Homepage'),
             ),
-            const ListTile(
-              leading: Icon(Icons.style),
-              title: Text('Preferiti'),
+            ListTile(
+              leading: const Icon(Icons.style),
+              title: const Text('Preferiti'),
+              onTap: () => Navigator.of(context).popAndPushNamed("/preferiti"),
             ),
             const ListTile(
               leading: Icon(Icons.android),

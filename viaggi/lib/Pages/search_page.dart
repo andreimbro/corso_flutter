@@ -14,6 +14,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  late TextEditingController controller;
   late List<MetaTuristica> _find;
   late final GlobalKey<ScaffoldState> _scaffoldKey;
   late RangeValues _rating;
@@ -23,6 +24,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController();
     _scaffoldKey = GlobalKey();
     _rating = const RangeValues(1, 5);
     _find = MetaTuristica.listaMete;
@@ -33,14 +35,18 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  _ricerca(String input,
-      {RangeValues rating = const RangeValues(1, 5),
-      String? country,
-      bool? disponibile}) {
-    _rating = rating;
-    _country = country;
-    _disponibile = disponibile;
-    if (input.isEmpty) {
+  _ricerca({
+    RangeValues rating = const RangeValues(1, 5),
+    String? country,
+    bool? disponibile,
+    bool reset = false,
+  }) {
+    if (reset) {
+      _rating = rating;
+      _country = country;
+      _disponibile = disponibile;
+    }
+    if (controller.text.isEmpty) {
       setState(() {
         _find = MetaTuristica.listaMete.where((meta) {
           return meta.rating >= _rating.start &&
@@ -51,10 +57,12 @@ class _SearchPageState extends State<SearchPage> {
                   meta.available == _disponibile);
         }).toList();
       });
-    } else if (input.length > 2) {
+    } else if (controller.text.length > 2) {
       setState(() {
         _find = MetaTuristica.listaMete.where((meta) {
-          return meta.city.toLowerCase().contains(input.toLowerCase()) &&
+          return meta.city
+                  .toLowerCase()
+                  .contains(controller.text.toLowerCase()) &&
               meta.rating >= _rating.start &&
               meta.rating <= _rating.end &&
               (_country == null || meta.country == _country) &&
@@ -97,6 +105,7 @@ class _SearchPageState extends State<SearchPage> {
                 children: [
                   Expanded(
                     child: SearchBar(
+                      controller: controller,
                       callback: _ricerca,
                     ),
                   ),

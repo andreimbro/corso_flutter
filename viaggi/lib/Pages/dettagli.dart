@@ -23,8 +23,10 @@ class Dettagli extends StatelessWidget {
                     size: 14,
                   ))),
         ),
-        actions: const [
-          Padding(padding: EdgeInsets.all(4.0), child: FavoriteButton()),
+        actions: [
+          Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: FavoriteButton(metaTuristica)),
         ],
       ),
       body: Column(
@@ -70,7 +72,7 @@ class Dettagli extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            Text(metaTuristica.description)
+                            Text(metaTuristica.description),
                           ],
                         ),
                       ),
