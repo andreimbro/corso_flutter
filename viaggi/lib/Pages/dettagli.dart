@@ -37,7 +37,7 @@ class Dettagli extends StatelessWidget {
                 children: [
                   Container(
                     color: const Color.fromRGBO(0, 0, 0, 0),
-                    height: 780,
+                    height: 780, ////////DA RISOLVERE////////////////
                   ),
                   SizedBox(
                     height: 380,
