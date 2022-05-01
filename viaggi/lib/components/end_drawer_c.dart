@@ -5,16 +5,20 @@ class EndDrawerC extends StatefulWidget {
   final RangeValues ratingInit;
   final String? countryInit;
   final bool? dispInit;
-  final Function(
-      {RangeValues rating,
-      String? country,
-      bool? disponibile,
-      bool reset}) prendiValues;
+  final bool? raccomandatoInit;
+  final Function({
+    RangeValues rating,
+    String? country,
+    bool? disponibile,
+    bool? raccomandato,
+    bool reset,
+  }) prendiValues;
   const EndDrawerC(
       {required this.prendiValues,
       required this.ratingInit,
       required this.countryInit,
       required this.dispInit,
+      required this.raccomandatoInit,
       Key? key})
       : super(key: key);
 
@@ -27,12 +31,14 @@ class _EndDrawerCState extends State<EndDrawerC> {
   late String? _countrySeleziona;
   late List<String> _listaCountry;
   late bool? _disponibile;
+  late bool? _raccomandato;
   @override
   void initState() {
     super.initState();
     _ratingseleziona = widget.ratingInit;
     _countrySeleziona = widget.countryInit;
     _disponibile = widget.dispInit;
+    _raccomandato = widget.raccomandatoInit;
     _listaCountry =
         MetaTuristica.listaMete.map((meta) => meta.country).toSet().toList();
   }
@@ -97,6 +103,15 @@ class _EndDrawerCState extends State<EndDrawerC> {
                         _disponibile = toggle;
                       });
                     }),
+                SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Raccomandati'),
+                    value: _raccomandato ?? false,
+                    onChanged: (toggle) {
+                      setState(() {
+                        _raccomandato = toggle;
+                      });
+                    }),
               ],
             ),
           ),
@@ -109,6 +124,7 @@ class _EndDrawerCState extends State<EndDrawerC> {
                       _disponibile = null;
                       _countrySeleziona = null;
                       _ratingseleziona = const RangeValues(1, 5);
+                      _raccomandato = null;
                     });
                   },
                   child: const Text('Reset')),
@@ -119,6 +135,7 @@ class _EndDrawerCState extends State<EndDrawerC> {
                       country: _countrySeleziona,
                       disponibile: _disponibile,
                       rating: _ratingseleziona,
+                      raccomandato: _raccomandato,
                     );
                     Navigator.of(context).pop();
                   },

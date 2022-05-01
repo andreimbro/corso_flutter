@@ -20,6 +20,7 @@ class _SearchPageState extends State<SearchPage> {
   late RangeValues _rating;
   String? _country;
   bool? _disponibile;
+  bool? _raccomandato;
 
   @override
   void initState() {
@@ -39,12 +40,14 @@ class _SearchPageState extends State<SearchPage> {
     RangeValues rating = const RangeValues(1, 5),
     String? country,
     bool? disponibile,
+    bool? raccomandato,
     bool reset = false,
   }) {
     if (reset) {
       _rating = rating;
       _country = country;
       _disponibile = disponibile;
+      _raccomandato = raccomandato;
     }
     if (controller.text.isEmpty) {
       setState(() {
@@ -54,7 +57,10 @@ class _SearchPageState extends State<SearchPage> {
               (_country == null || meta.country == _country) &&
               (_disponibile == null ||
                   _disponibile == false ||
-                  meta.available == _disponibile);
+                  meta.available == _disponibile) &&
+              (_raccomandato == null ||
+                  meta.raccomanded == _raccomandato ||
+                  _raccomandato == false);
         }).toList();
       });
     } else if (controller.text.length > 2) {
@@ -68,7 +74,10 @@ class _SearchPageState extends State<SearchPage> {
               (_country == null || meta.country == _country) &&
               (_disponibile == null ||
                   _disponibile == false ||
-                  meta.available == _disponibile);
+                  meta.available == _disponibile) &&
+              (_raccomandato == null ||
+                  meta.raccomanded == _raccomandato ||
+                  _raccomandato == false);
         }).toList();
       });
     }
@@ -92,10 +101,12 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
         endDrawer: EndDrawerC(
-            prendiValues: _ricerca,
-            countryInit: _country,
-            dispInit: _disponibile,
-            ratingInit: _rating),
+          prendiValues: _ricerca,
+          countryInit: _country,
+          dispInit: _disponibile,
+          ratingInit: _rating,
+          raccomandatoInit: _raccomandato,
+        ),
         endDrawerEnableOpenDragGesture: false,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
