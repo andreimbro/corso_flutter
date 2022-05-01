@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viaggi/Pages/home.dart';
-import 'package:viaggi/Pages/log_in.dart';
+import 'package:viaggi/Pages/log_in';
 
 class ControllLog extends StatefulWidget {
   const ControllLog({Key? key}) : super(key: key);

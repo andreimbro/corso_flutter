@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:viaggi/Pages/home.dart';
+
+import 'home.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -10,32 +11,31 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  final _formKey = GlobalKey<FormState>();
+  bool _viewpass = true;
+  bool logged = false;
+
+  void inizializeSharedPreferences() async {
+    SharedPreferences logpref = await SharedPreferences.getInstance();
+    setState(() {
+      logged = logpref.getBool('logKey') ?? false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    inizializeSharedPreferences();
+  }
+
+  void view() {
+    setState(() {
+      _viewpass = !_viewpass;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    bool _viewpass = true;
-    bool logged = false;
-
-    void inizializeSharedPreferences() async {
-      SharedPreferences logpref = await SharedPreferences.getInstance();
-      setState(() {
-        logged = logpref.getBool('logKey') ?? false;
-      });
-    }
-
-    @override
-    void initState() {
-      super.initState();
-      inizializeSharedPreferences();
-      print(logged);
-    }
-
-    void view() {
-      setState(() {
-        _viewpass = !_viewpass;
-      });
-    }
-
     return logged
         ? const Home()
         : Scaffold(

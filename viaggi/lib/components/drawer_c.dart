@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerC extends StatelessWidget {
   const DrawerC({Key? key}) : super(key: key);
@@ -13,7 +14,9 @@ class DrawerC extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(onPressed: (() {}), icon: const Icon(Icons.close)),
+            IconButton(
+                onPressed: (() => Navigator.of(context).pop()),
+                icon: const Icon(Icons.close)),
             const DrawerHeader(
               child: Center(
                   child: CircleAvatar(
@@ -29,9 +32,16 @@ class DrawerC extends StatelessWidget {
               title: const Text('Preferiti'),
               onTap: () => Navigator.of(context).popAndPushNamed("/preferiti"),
             ),
-            const ListTile(
-              leading: Icon(Icons.android),
-              title: Text('Logout'),
+            ListTile(
+              leading: const Icon(Icons.android),
+              title: const Text('Logout'),
+              onTap: () async {
+                SharedPreferences logpref =
+                    await SharedPreferences.getInstance();
+                logpref.setBool('logKey', false);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/', (Route<dynamic> route) => false);
+              },
             )
           ],
         ),
