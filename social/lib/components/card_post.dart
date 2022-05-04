@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../models/post.dart';
+import 'package:social/models/global.dart' as global;
 
 class CardPost extends StatelessWidget {
   final Post post;
@@ -19,8 +21,8 @@ class CardPost extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(post.owner.picture ??
-                  "https://www.publicdomainpictures.net/en/view-image.php?image=270609&picture=not-found-image"),
+              backgroundImage:
+                  NetworkImage(post.owner.picture ?? global.ImangeNotFound),
             ),
             title: Row(
               children: [
@@ -29,6 +31,25 @@ class CardPost extends StatelessWidget {
                 Text(post.owner.lastName),
               ],
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12, bottom: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (post.publishDate != null)
+                Text(
+                  DateFormat.yMMMMd('it_IT').add_Hm().format(
+                        DateTime.parse(post.publishDate!),
+                      ),
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal),
+                ),
+            ],
           ),
         ),
         Image.network(post.image),
