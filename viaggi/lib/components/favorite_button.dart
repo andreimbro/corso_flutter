@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viaggi/models/meta_turistica.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class FavoriteButton extends StatefulWidget {
   final MetaTuristica metaTuristica;
@@ -15,8 +15,10 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   bool favorite = false;
 
   void initsharepref() async {
-    SharedPreferences shareprefe = await SharedPreferences.getInstance();
-    final _pref = shareprefe.getStringList("preferiti") ?? [];
+    StreamingSharedPreferences shareprefe =
+        await StreamingSharedPreferences.instance;
+    final _pref =
+        shareprefe.getStringList("preferiti", defaultValue: []).getValue();
     setState(() {
       favorite = _pref.contains(widget.metaTuristica.city);
     });
@@ -29,15 +31,19 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   }
 
   void aggiungipreferiti() async {
-    SharedPreferences shareprefe = await SharedPreferences.getInstance();
-    var _newpref = shareprefe.getStringList("preferiti") ?? [];
+    StreamingSharedPreferences shareprefe =
+        await StreamingSharedPreferences.instance;
+    var _newpref =
+        shareprefe.getStringList("preferiti", defaultValue: []).getValue();
     _newpref.add(widget.metaTuristica.city);
     await shareprefe.setStringList("preferiti", _newpref);
   }
 
   void rimuovipreferiti() async {
-    SharedPreferences shareprefe = await SharedPreferences.getInstance();
-    var _pref = shareprefe.getStringList("preferiti") ?? [];
+    StreamingSharedPreferences shareprefe =
+        await StreamingSharedPreferences.instance;
+    var _pref =
+        shareprefe.getStringList("preferiti", defaultValue: []).getValue();
     _pref.remove(widget.metaTuristica.city);
     await shareprefe.setStringList("preferiti", _pref);
   }

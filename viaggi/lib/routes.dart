@@ -1,4 +1,4 @@
-import 'package:viaggi/Pages/preferiti_page.dart';
+import 'package:viaggi/Pages/preferiti_page';
 import 'package:viaggi/Pages/search_page.dart';
 
 import 'Pages/home.dart';

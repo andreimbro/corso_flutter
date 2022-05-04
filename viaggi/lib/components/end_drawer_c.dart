@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:viaggi/components/list_catego.dart';
 import "package:viaggi/models/meta_turistica.dart";
 
 class EndDrawerC extends StatefulWidget {
@@ -52,6 +54,7 @@ class _EndDrawerCState extends State<EndDrawerC> {
           Expanded(
             child: ListView(
               children: [
+                ListCat(),
                 RangeSlider(
                   min: 1,
                   max: 5,

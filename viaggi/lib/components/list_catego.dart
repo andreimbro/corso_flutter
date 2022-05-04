@@ -27,15 +27,17 @@ class ListCat extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Interessi.values[index].color,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Icon(
-                        Interessi.values[index].icon,
-                        color: Colors.white,
+                    InkWell(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Interessi.values[index].color,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Icon(
+                          Interessi.values[index].icon,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Text(

@@ -33,7 +33,7 @@ class DrawerC extends StatelessWidget {
               onTap: () => Navigator.of(context).popAndPushNamed("/preferiti"),
             ),
             ListTile(
-              leading: const Icon(Icons.android),
+              leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () async {
                 SharedPreferences logpref =
