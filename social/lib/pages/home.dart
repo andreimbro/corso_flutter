@@ -17,6 +17,7 @@ class _HomeState extends State<Home> {
   late Future<List<Post>> _future;
   late int _skipPost;
   late bool _hasMorePost;
+  late int _page;
 
   @override
   void initState() {
@@ -25,12 +26,13 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Post>> _fetchPost() async {
-    final PostResponse result = await ApiPost.getPostList();
+    final PostResponse result = await ApiPost.getPostList(page: _page);
 
     setState(() {
       _skipPost = _skipPost + result.limit;
-      _hasMorePost = (result.total - _skipPost > 0);
+      _hasMorePost = (result.total - _skipPost) > 0;
       _listPost = _listPost + result.data;
+      _page++;
     });
 
     return _listPost;
@@ -40,6 +42,8 @@ class _HomeState extends State<Home> {
     _listPost = [];
     _hasMorePost = false;
     _skipPost = 0;
+    _page = 0;
+
     _future = _fetchPost();
   }
 
@@ -85,4 +89,4 @@ class _HomeState extends State<Home> {
               );
             }));
   }
-}//ciao
+}
