@@ -22,7 +22,7 @@ class _BodyHomeState extends State<BodyHome> {
   @override
   void initState() {
     super.initState();
-    inizializeInitVariables();
+    inizializzaVariabili();
   }
 
   Future<List<Post>> _fetchPost() async {
@@ -38,7 +38,7 @@ class _BodyHomeState extends State<BodyHome> {
     return _listPost;
   }
 
-  void inizializeInitVariables() {
+  void inizializzaVariabili() {
     _listPost = [];
     _hasMorePost = false;
     _skipPost = 0;
@@ -49,34 +49,42 @@ class _BodyHomeState extends State<BodyHome> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _future,
-        builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data is List<Post>) {
-            final listPost = (snapshot.data as List<Post>);
-            return ListView.builder(
-                itemCount: listPost.length,
-                itemBuilder: (context, index) {
-                  if (index == _listPost.length - 1 && _hasMorePost) {
-                    _future = _fetchPost();
-
-                    return Column(
-                      children: [
-                        CardPost(post: listPost[index]),
-                        if (index < _listPost.length)
-                          const CircularProgressIndicator(),
-                      ],
-                    );
-                  }
-                  return CardPost(post: listPost[index]);
-                });
-          }
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+    return RefreshIndicator(
+      onRefresh: () {
+        setState(() {
+          inizializzaVariabili();
         });
+        return Future.value();
+      },
+      child: FutureBuilder(
+          future: _future,
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data is List<Post>) {
+              final listPost = (snapshot.data as List<Post>);
+              return ListView.builder(
+                  itemCount: listPost.length,
+                  itemBuilder: (context, index) {
+                    if (index == _listPost.length - 1 && _hasMorePost) {
+                      _future = _fetchPost();
+
+                      return Column(
+                        children: [
+                          CardPost(post: listPost[index]),
+                          if (index < _listPost.length)
+                            const CircularProgressIndicator(),
+                        ],
+                      );
+                    }
+                    return CardPost(post: listPost[index]);
+                  });
+            }
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
+    );
   }
 }
