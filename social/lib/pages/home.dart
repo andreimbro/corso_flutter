@@ -69,13 +69,17 @@ class _HomeState extends State<Home> {
               if (snapshot.hasData && snapshot.data is List<Post>) {
                 final listPost = (snapshot.data as List<Post>);
                 return ListView.builder(
-                    itemCount: listPost.length + (_hasMorePost ? 1 : 0),
+                    itemCount: listPost.length,
                     itemBuilder: (context, index) {
-                      if (index == _listPost.length) {
+                      if (index == _listPost.length - 1 && _hasMorePost) {
                         _future = _fetchPost();
 
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return Column(
+                          children: [
+                            CardPost(post: listPost[index]),
+                            if (index < _listPost.length)
+                              CircularProgressIndicator(),
+                          ],
                         );
                       }
                       return CardPost(post: listPost[index]);
