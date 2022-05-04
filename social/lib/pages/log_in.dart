@@ -33,7 +33,7 @@ class _LogInState extends State<LogIn> {
   void inizializeSharedPreferences() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     setState(() {
-      logged = sp.getString('logKey') == "" ? false : true;
+      logged = sp.getString('logKey') == "";
     });
   }
 
