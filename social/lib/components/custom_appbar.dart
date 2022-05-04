@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../profilo/profilo.dart';
+import '../pages/profilo/profilo.dart';
 
 class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBAr({Key? key}) : super(key: key);

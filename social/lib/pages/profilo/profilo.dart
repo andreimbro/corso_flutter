@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:social/pages/profilo/components/body_profilo.dart';
+
+import '../../api/api_users.dart';
+import '../../models/user.dart';
 
 class Profilo extends StatefulWidget {
   final String iduser;
@@ -9,36 +13,28 @@ class Profilo extends StatefulWidget {
 }
 
 class _ProfiloState extends State<Profilo> {
+  late Future<User> _future;
+
+  Future<User> _fetchUser(String id) async {
+    return ApiUser.getDetails(id);
+  }
+
+  void initvariabili() {
+    _future = _fetchUser(widget.iduser);
+  }
+
+  @override
+  void initState() {
+    initvariabili();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Card(
-          child: Column(
-            children: [
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: CircleAvatar(
-                  radius: 80,
-                ),
-              )),
-              const Divider(),
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    ListTile(
-                      leading: Icon(
-                        Icons.person,
-                      ),
-                      title: Text("data"),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ));
+        appBar: AppBar(
+          elevation: 0,
+        ),
+        body: BodyProfilo(_future));
   }
 }

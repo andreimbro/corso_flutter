@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/user.dart';
 import '../../home_page/home.dart';
+import "package:social/models/global.dart" as global;
 
 class LogInCard extends StatelessWidget {
   final User user;
@@ -34,10 +35,8 @@ class LogInCard extends StatelessWidget {
               ),
               CircleAvatar(
                 radius: 40,
-                backgroundImage: user.picture != null
-                    ? NetworkImage(user.picture!)
-                    : const NetworkImage(
-                        "https://www.publicdomainpictures.net/en/view-image.php?image=270609&picture=not-found-image"),
+                backgroundImage:
+                    NetworkImage(user.picture ?? global.ImangeNotFound),
               ),
               Padding(
                   padding: const EdgeInsets.all(20),

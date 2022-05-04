@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social/pages/home_page/components/body_home.dart';
-import 'package:social/pages/home_page/components/custom_appbar.dart';
+import 'package:social/components/custom_appbar.dart';
 import 'package:social/pages/home_page/components/drawer_custom.dart';
 
 class Home extends StatelessWidget {
