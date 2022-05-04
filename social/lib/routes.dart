@@ -1,5 +1,5 @@
-import 'package:social/pages/home.dart';
-import 'package:social/pages/log_in.dart';
+import 'package:social/pages/home_page/home.dart';
+import 'package:social/pages/log_in/log_in.dart';
 
 routes() {
   return {
