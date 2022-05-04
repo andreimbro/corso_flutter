@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
                           children: [
                             CardPost(post: listPost[index]),
                             if (index < _listPost.length)
-                              CircularProgressIndicator(),
+                              const CircularProgressIndicator(),
                           ],
                         );
                       }
