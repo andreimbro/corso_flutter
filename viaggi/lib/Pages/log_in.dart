@@ -52,7 +52,7 @@ class _LogInState extends State<LogIn> {
             body: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30),
+                  padding: EdgeInsets.symmetric(vertical: 15),
                   child: CircleAvatar(
                     radius: 70,
                   ),
