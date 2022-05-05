@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:social/models/comment.dart';
 import 'package:social/models/global.dart' as global;
 
@@ -9,20 +10,55 @@ class CardComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 6,
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ListTile(
-            leading: CircleAvatar(
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: CircleAvatar(
+              radius: 30,
               backgroundImage: NetworkImage(
                 comment.owner.picture ?? global.ImangeNotFound,
               ),
             ),
-            title: Text(comment.owner.firstName),
           ),
-          Text(comment.message),
-          SizedBox(
-            height: 10,
-          )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    comment.owner.firstName,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                    textAlign: TextAlign.start,
+                  ),
+                  const SizedBox(
+                    width: 70,
+                  ),
+                  Text(
+                    DateFormat.yMMMMd('it_IT').add_Hm().format(
+                          DateTime.parse(comment.publishDate!),
+                        ),
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(comment.message),
+            ],
+          ),
         ],
       ),
     );
