@@ -23,10 +23,6 @@ class DrawerC extends StatelessWidget {
                 maxRadius: 50,
               )),
             ),
-            const ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Homepage'),
-            ),
             ListTile(
               leading: const Icon(Icons.style),
               title: const Text('Preferiti'),

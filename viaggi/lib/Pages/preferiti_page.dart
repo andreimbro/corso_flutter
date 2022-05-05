@@ -1,51 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 import 'package:viaggi/components/card_c.dart';
 import 'package:viaggi/components/favorite_button.dart';
 import 'package:viaggi/models/meta_turistica.dart';
 
-class PreferitiPage extends StatefulWidget {
-  const PreferitiPage({Key? key}) : super(key: key);
+class PreferitiPage extends StatelessWidget {
+  final StreamingSharedPreferences shareprefe;
 
-  @override
-  State<PreferitiPage> createState() => _PreferitiPageState();
-}
-
-class _PreferitiPageState extends State<PreferitiPage> {
-  bool favorite = false;
-  List<MetaTuristica> listamete = [];
-
-  void initsharepref() async {
-    SharedPreferences shareprefe = await SharedPreferences.getInstance();
-    final _pref = shareprefe.getStringList("preferiti") ?? [];
-    setState(() {
-      MetaTuristica.listaMete.forEach((meta) {
-        if (_pref.contains(meta.city)) {
-          listamete.add(meta);
-        }
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initsharepref();
-  }
+  const PreferitiPage(this.shareprefe, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<MetaTuristica> getMetePreferite(List<String> _preferences) {
+      List<MetaTuristica> metePreferite = [];
+      for (var meta in MetaTuristica.listaMete) {
+        if (_preferences.contains(meta.city)) {
+          metePreferite.add(meta);
+        }
+      }
+      return metePreferite;
+    }
+
     return Scaffold(
-        body: ListView.builder(
-            itemCount: listamete.length,
-            itemBuilder: (context, index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CardC(listamete[index]),
-                  FavoriteButton(listamete[index]),
-                ],
-              );
+        appBar: AppBar(
+          title: const Text("Preferiti"),
+        ),
+        body: PreferenceBuilder<List<String>>(
+            preference: shareprefe.getStringList("preferiti", defaultValue: []),
+            builder: (context, _preferenceResult) {
+              List<MetaTuristica> listamete =
+                  getMetePreferite(_preferenceResult);
+              return ListView.builder(
+                  itemCount: listamete.length,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CardC(listamete[index]),
+                        FavoriteButton(listamete[index]),
+                      ],
+                    );
+                  });
             }));
   }
 }
