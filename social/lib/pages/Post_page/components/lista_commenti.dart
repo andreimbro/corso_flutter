@@ -20,8 +20,7 @@ class _ListaCommentiState extends State<ListaCommenti> {
 
   Future<List<Comment>> _fetchComment() async {
     CommentResponse result =
-        (await ApiComment.getCommentsFromPost(widget.idPost))
-            as CommentResponse;
+        await ApiComment.getCommentsFromPost(widget.idPost);
 
     setState(() {
       _skipComment = _skipComment + result.limit;

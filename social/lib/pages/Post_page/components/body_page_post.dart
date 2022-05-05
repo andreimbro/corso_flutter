@@ -13,7 +13,14 @@ class BodyPagePost extends StatelessWidget {
     return ListView(
       children: [
         CardPost(post: post),
-        ListaCommenti(post.id!),
+        Container(
+          height: 200,
+          child: Column(
+            children: [
+              Expanded(child: ListaCommenti(post.id!)),
+            ],
+          ),
+        ),
       ],
     );
   }
