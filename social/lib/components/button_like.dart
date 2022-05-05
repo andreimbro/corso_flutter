@@ -16,12 +16,14 @@ class _LikeButtonState extends State<LikeButton> {
   void initsharepref() async {
     SharedPreferences shareprefe = await SharedPreferences.getInstance();
     final _like = shareprefe.getStringList("preferiti") ?? [];
-    setState(() {
-      like = _like.contains(widget.post.id);
-      if (like) {
-        likenum++;
-      }
-    });
+    if (mounted) {
+      setState(() {
+        like = _like.contains(widget.post.id);
+        if (like) {
+          likenum++;
+        }
+      });
+    }
   }
 
   void aggiungipreferiti() async {
