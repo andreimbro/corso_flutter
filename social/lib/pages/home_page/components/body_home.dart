@@ -6,7 +6,10 @@ import '../../../models/post.dart';
 import '../../../models/post_response.dart';
 
 class BodyHome extends StatefulWidget {
-  const BodyHome({Key? key}) : super(key: key);
+  final String? iduser;
+  final bool profilo;
+  const BodyHome({this.iduser, this.profilo = false, Key? key})
+      : super(key: key);
 
   @override
   State<BodyHome> createState() => _BodyHomeState();
@@ -26,7 +29,12 @@ class _BodyHomeState extends State<BodyHome> {
   }
 
   Future<List<Post>> _fetchPost() async {
-    final PostResponse result = await ApiPost.getPostList(page: _page);
+    late PostResponse result;
+    if (widget.iduser != null) {
+      result = await ApiPost.getPostByUser(widget.iduser!);
+    } else {
+      result = await ApiPost.getPostList(page: _page);
+    }
 
     setState(() {
       _skipPost = _skipPost + result.limit;
@@ -75,7 +83,10 @@ class _BodyHomeState extends State<BodyHome> {
                         ],
                       );
                     }
-                    return CardPost(post: listPost[index]);
+                    return CardPost(
+                      post: listPost[index],
+                      profilo: widget.profilo,
+                    );
                   });
             }
             if (snapshot.hasError) {

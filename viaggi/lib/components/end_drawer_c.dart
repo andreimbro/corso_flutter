@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:viaggi/components/list_catego.dart';
 import "package:viaggi/models/meta_turistica.dart";
 
+import '../models/interessi.dart';
+
 class EndDrawerC extends StatefulWidget {
   final RangeValues ratingInit;
   final String? countryInit;
@@ -54,7 +56,22 @@ class _EndDrawerCState extends State<EndDrawerC> {
           Expanded(
             child: ListView(
               children: [
-                ListCat(),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: SizedBox(
+                        height: 120,
+                        child: ListView.builder(
+                            itemCount: Interessi.values.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                  margin: index != Interessi.values.length - 1
+                                      ? const EdgeInsets.only(
+                                          right: 20, top: 10, bottom: 10)
+                                      : const EdgeInsets.only(
+                                          top: 10, bottom: 10),
+                                  child: ListCat(Interessi.values[index]));
+                            }))),
                 RangeSlider(
                   min: 1,
                   max: 5,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social/models/global.dart' as global;
+import 'package:social/pages/home_page/components/body_home.dart';
+import 'package:social/pages/profilo/components/list_dettagli_profilo.dart';
 
 import '../../../models/user.dart';
 
@@ -16,6 +18,7 @@ class BodyProfilo extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         final user = (snapshot.data as User);
+
         return SizedBox(
           child: Column(
             children: [
@@ -40,38 +43,13 @@ class BodyProfilo extends StatelessWidget {
                 height: 5,
               ),
               const Divider(),
+              ListProfDett(user),
+              const Divider(),
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    ListTile(
-                      leading: const Icon(
-                        Icons.person,
-                      ),
-                      title: Text("${user.firstName}\t${user.lastName}"),
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.mail,
-                      ),
-                      title: Text(user.email ?? "not found"),
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.gps_fixed,
-                      ),
-                      title: Text(
-                          "${user.location?.city},\t${user.location?.country}"),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        user.gender == "female" ? Icons.girl : Icons.boy,
-                      ),
-                      title: Text(user.gender ?? "not found"),
-                    ),
-                  ],
-                ),
-              )
+                  child: BodyHome(
+                iduser: user.id,
+                profilo: true,
+              )),
             ],
           ),
         );

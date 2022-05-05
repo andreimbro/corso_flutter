@@ -4,9 +4,13 @@ import 'package:intl/intl.dart';
 import '../models/post.dart';
 import 'package:social/models/global.dart' as global;
 
+import '../pages/profilo/profilo.dart';
+
 class CardPost extends StatelessWidget {
   final Post post;
-  const CardPost({required this.post, Key? key}) : super(key: key);
+  final bool profilo;
+  const CardPost({required this.post, this.profilo = false, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +23,27 @@ class CardPost extends StatelessWidget {
       child: Column(children: [
         Padding(
           padding: const EdgeInsets.all(4),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage:
-                  NetworkImage(post.owner.picture ?? global.ImangeNotFound),
-            ),
-            title: Row(
-              children: [
-                Text(post.owner.firstName),
-                const SizedBox(width: 4),
-                Text(post.owner.lastName),
-              ],
+          child: InkWell(
+            onTap: (() {
+              if (profilo == false) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return Profilo(post.owner.id ?? "user not found");
+                }));
+              }
+            }),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage:
+                    NetworkImage(post.owner.picture ?? global.ImangeNotFound),
+              ),
+              title: Row(
+                children: [
+                  Text(post.owner.firstName),
+                  const SizedBox(width: 4),
+                  Text(post.owner.lastName),
+                ],
+              ),
             ),
           ),
         ),

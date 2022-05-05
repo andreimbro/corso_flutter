@@ -27,11 +27,6 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Category',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-                const ListCat(),
                 Row(
                   children: const [
                     Expanded(
