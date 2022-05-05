@@ -3,11 +3,19 @@ import 'package:viaggi/models/interessi.dart';
 
 class ListCat extends StatelessWidget {
   final Interessi interessi;
-  const ListCat(this.interessi, {Key? key}) : super(key: key);
+  final bool categoriacolor;
+  final Function(Interessi) callback;
+  const ListCat(
+      {required this.interessi,
+      required this.categoriacolor,
+      required this.callback,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () => callback(interessi),
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -22,11 +30,11 @@ class ListCat extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: interessi.color,
+                  color: categoriacolor ? Colors.transparent : interessi.color,
                   borderRadius: BorderRadius.circular(12)),
               child: Icon(
                 interessi.icon,
-                color: Colors.white,
+                color: categoriacolor ? interessi.color : Colors.white,
               ),
             ),
             Text(

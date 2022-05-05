@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
@@ -39,65 +40,98 @@ class _LogInState extends State<LogIn> {
     return logged
         ? const Home()
         : Scaffold(
-            appBar: AppBar(),
-            body: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: "Email",
-                      hintText: "Inserisci Email",
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Inserisci una email";
-                      }
-                      if (!value.contains("@") || !value.contains(".")) {
-                        return "Inserisci una email valida";
-                      }
-                      if (value != "ciao@gmail.com") {
-                        return "L'email non è presente neldatabase";
-                      }
-                      return null;
-                    },
+            appBar: AppBar(
+              backgroundColor: Colors.white10,
+              elevation: 0,
+              title: const Text(
+                "Login",
+                style: TextStyle(color: Colors.blue),
+              ),
+              centerTitle: true,
+            ),
+            body: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  child: CircleAvatar(
+                    radius: 70,
                   ),
-                  TextFormField(
-                    obscureText: _viewpass,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Inserisci un Password";
-                      } else if (value.length < 4) {
-                        return "Password non valida";
-                      }
-                      if (value != "ciao") {
-                        return "Password non corrisponde";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      hintText: "Inserisci Passsword ",
-                      suffixIcon: IconButton(
-                        onPressed: view,
-                        icon: Icon(
-                          _viewpass ? Icons.visibility : Icons.visibility_off,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 12),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            hintText: "Inserisci Email",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Inserisci una email";
+                            }
+                            if (!value.contains("@") || !value.contains(".")) {
+                              return "Inserisci una email valida";
+                            }
+                            if (value != "ciao@gmail.com") {
+                              return "L'email non è presente neldatabase";
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 12),
+                        child: TextFormField(
+                          obscureText: _viewpass,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Inserisci un Password";
+                            } else if (value.length < 4) {
+                              return "Password non valida";
+                            }
+                            if (value != "ciao") {
+                              return "Password non corrisponde";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            labelText: "Password",
+                            hintText: "Inserisci Passsword ",
+                            suffixIcon: IconButton(
+                              onPressed: view,
+                              icon: Icon(
+                                _viewpass
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () async {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              SharedPreferences logpref =
+                                  await SharedPreferences.getInstance();
+                              logpref.setBool('logKey', true);
+                              Navigator.of(context).popAndPushNamed('/home');
+                            }
+                          },
+                          child: const Text("LogIn"))
+                    ],
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          SharedPreferences logpref =
-                              await SharedPreferences.getInstance();
-                          logpref.setBool('logKey', true);
-                          Navigator.of(context).popAndPushNamed('/home');
-                        }
-                      },
-                      child: const Text("LogIn"))
-                ],
-              ),
+                ),
+              ],
             ),
           );
   }

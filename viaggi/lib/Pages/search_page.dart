@@ -6,6 +6,8 @@ import 'package:viaggi/components/search_bar.dart';
 import 'package:viaggi/components/tasto_op.dart';
 import 'package:viaggi/models/meta_turistica.dart';
 
+import '../models/interessi.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -21,6 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   String? _country;
   bool? _disponibile;
   bool? _raccomandato;
+  late List<Interessi> _categorie;
 
   @override
   void initState() {
@@ -29,6 +32,8 @@ class _SearchPageState extends State<SearchPage> {
     _scaffoldKey = GlobalKey();
     _rating = const RangeValues(1, 5);
     _find = MetaTuristica.listaMete;
+    _categorie = [];
+
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (ModalRoute.of(context)?.settings.arguments == true) {
         _scaffoldKey.currentState?.openEndDrawer();
@@ -36,18 +41,19 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  _ricerca({
-    RangeValues rating = const RangeValues(1, 5),
-    String? country,
-    bool? disponibile,
-    bool? raccomandato,
-    bool reset = false,
-  }) {
+  _ricerca(
+      {RangeValues rating = const RangeValues(1, 5),
+      String? country,
+      bool? disponibile,
+      bool? raccomandato,
+      bool reset = false,
+      List<Interessi> categorie = const []}) {
     if (reset) {
       _rating = rating;
       _country = country;
       _disponibile = disponibile;
       _raccomandato = raccomandato;
+      _categorie = categorie;
     }
     if (controller.text.isEmpty) {
       setState(() {
@@ -60,7 +66,11 @@ class _SearchPageState extends State<SearchPage> {
                   meta.available == _disponibile) &&
               (_raccomandato == null ||
                   meta.raccomanded == _raccomandato ||
-                  _raccomandato == false);
+                  _raccomandato == false &&
+                      (_categorie.isEmpty ||
+                          (meta.categorie
+                                  ?.any((cat) => _categorie.contains(cat)) ??
+                              false)));
         }).toList();
       });
     } else if (controller.text.length > 2) {
@@ -77,7 +87,11 @@ class _SearchPageState extends State<SearchPage> {
                   meta.available == _disponibile) &&
               (_raccomandato == null ||
                   meta.raccomanded == _raccomandato ||
-                  _raccomandato == false);
+                  _raccomandato == false &&
+                      (_categorie.isEmpty ||
+                          (meta.categorie
+                                  ?.any((cat) => _categorie.contains(cat)) ??
+                              false)));
         }).toList();
       });
     }
@@ -106,6 +120,7 @@ class _SearchPageState extends State<SearchPage> {
           dispInit: _disponibile,
           ratingInit: _rating,
           raccomandatoInit: _raccomandato,
+          categorieSelezionate: _categorie,
         ),
         endDrawerEnableOpenDragGesture: false,
         body: Padding(
