@@ -11,16 +11,10 @@ class BodyPagePost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true,
       children: [
         CardPost(post: post),
-        Container(
-          height: 200,
-          child: Column(
-            children: [
-              Expanded(child: ListaCommenti(post.id!)),
-            ],
-          ),
-        ),
+        ListaCommenti(post.id!),
       ],
     );
   }

@@ -60,6 +60,8 @@ class _ListaCommentiState extends State<ListaCommenti> {
             if (snapshot.hasData && snapshot.data is List<Comment>) {
               final listComment = (snapshot.data as List<Comment>);
               return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
                   itemCount: listComment.length,
                   itemBuilder: (context, index) {
                     if (index == _listComment.length - 1 && _hasMoreComment) {

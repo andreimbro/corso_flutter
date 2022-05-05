@@ -16,7 +16,6 @@ class CardComment extends StatelessWidget {
       elevation: 6,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
             padding: const EdgeInsets.all(15),
@@ -27,37 +26,36 @@ class CardComment extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    comment.owner.firstName,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16),
-                    textAlign: TextAlign.start,
-                  ),
-                  const SizedBox(
-                    width: 70,
-                  ),
-                  Text(
-                    DateFormat.yMMMMd('it_IT').add_Hm().format(
-                          DateTime.parse(comment.publishDate!),
-                        ),
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(comment.message),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      comment.owner.firstName,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        DateFormat.yMMMMd('it_IT').add_Hm().format(
+                              DateTime.parse(comment.publishDate!),
+                            ),
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(comment.message),
+              ],
+            ),
           ),
         ],
       ),
