@@ -22,7 +22,7 @@ class _ListProfDettState extends State<ListProfDett> {
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
+      expansionCallback: (int index, bool exapand) {
         setState(() {
           isExpanded = !isExpanded;
         });

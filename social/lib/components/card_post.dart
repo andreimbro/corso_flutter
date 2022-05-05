@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:social/components/button_like.dart';
+import 'package:social/pages/Post_page/post_page.dart';
 
 import '../models/post.dart';
 import 'package:social/models/global.dart' as global;
@@ -78,12 +80,14 @@ class CardPost extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: [
+              LikeButton(post),
               TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.favorite),
-                  label: Text(post.likes.toString())),
-              TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return PostPage(post);
+                  }));
+                },
                 icon: const Icon(Icons.comment_bank_outlined),
                 label: const Text(""),
               )
