@@ -76,8 +76,16 @@ class CardPost extends StatelessWidget {
                       child: Chip(label: Text(item)),
                     ))
                 .toList()),
+        Row(
+          children: [
+            const SizedBox(width: 20),
+            Wrap(
+              children: [Text(post.text)],
+            ),
+          ],
+        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Row(
             children: [
               LikeButton(post),
