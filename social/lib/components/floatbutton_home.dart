@@ -62,7 +62,13 @@ class _FloaatButtonHomeState extends State<FloaatButtonHome> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.close)),
+                            onPressed: () {
+                              _text = null;
+                              _controllerText.clear();
+                              _controllerTag.clear();
+                              Navigator.of(context).pop();
+                            },
+                            icon: const Icon(Icons.close)),
                         IconButton(
                             onPressed: () async {
                               const provauser = User(

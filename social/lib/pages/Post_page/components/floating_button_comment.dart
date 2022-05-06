@@ -13,7 +13,7 @@ class FloatButtonC extends StatefulWidget {
 
 class _FloatButtonCState extends State<FloatButtonC> {
   late TextEditingController _controller;
-  late String _commento;
+  late String? _commento;
   @override
   void initState() {
     _controller = TextEditingController();
@@ -42,15 +42,25 @@ class _FloatButtonCState extends State<FloatButtonC> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(onPressed: () {}, icon: Icon(Icons.close)),
+                          IconButton(
+                              onPressed: () {
+                                _commento = null;
+                                _controller.clear();
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(Icons.close)),
                           IconButton(
                               onPressed: () async {
-                                ApiComment.addCommentTo(
-                                    widget.postId, _commento);
-                                Navigator.of(context)
-                                    .pop(widget.callback(true));
+                                if (_commento == null || _commento!.isEmpty) {
+                                  Navigator.of(context).pop();
+                                } else {
+                                  ApiComment.addCommentTo(
+                                      widget.postId, _commento!);
+                                  Navigator.of(context)
+                                      .pop(widget.callback(true));
+                                }
                               },
-                              icon: Icon(Icons.send)),
+                              icon: const Icon(Icons.send)),
                         ],
                       )
                     ],
