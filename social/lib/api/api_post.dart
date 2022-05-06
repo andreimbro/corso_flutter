@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/post.dart';
 import '../models/post_response.dart';
@@ -40,5 +41,31 @@ class ApiPost {
     }
     throw Exception(
         'Errore in ricevere i dettagli dell utente ${response.body}');
+  }
+
+  static Future<Post> addPostById(Post post) async {
+    Map<String, dynamic> jsonPost = post.toJson();
+    jsonPost.removeWhere((key, value) => value == null);
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    final idUser = sp.getString('logKey');
+    if (idUser == null) {
+      throw Exception("Non sei loggato");
+    } else {
+      jsonPost['owner'] = idUser;
+    }
+
+    final http.Response response = await http.post(
+        Uri.parse('$baseUrl/post/create'),
+        headers: {
+          'app-id': '626fc933e000f6ac62f05f14',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(jsonPost));
+
+    if (response.statusCode == 200) {
+      return Post.fromJson(jsonDecode(response.body));
+    }
+
+    throw Exception('Errore creazione fallita: ${response.body}');
   }
 }

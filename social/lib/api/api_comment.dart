@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/comment.dart';
 import '../models/comment_response.dart';
 
 class ApiComment {
@@ -45,5 +47,28 @@ class ApiComment {
     }
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
+  }
+
+  static Future<Comment> addCommentTo(String postId, String message) async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    String? userId = sp.getString('logKey');
+
+    if (userId == null) {
+      throw Exception('Impossibile insere un commento,non sei loggato');
+    }
+    final http.Response response = await http.post(
+        Uri.parse('$baseUrl/comment/create'),
+        headers: {
+          'app-id': '626fc933e000f6ac62f05f14',
+          'Content-Type': 'application/json'
+        },
+        body:
+            jsonEncode({'owner': userId, 'post': postId, 'message': message}));
+
+    if (response.statusCode == 200) {
+      return Comment.fromJson(jsonDecode(response.body));
+    }
+
+    throw Exception('Errore invio commento: ${response.body}');
   }
 }
