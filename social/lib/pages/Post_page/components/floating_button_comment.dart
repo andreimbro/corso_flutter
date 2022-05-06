@@ -16,6 +16,7 @@ class _FloatButtonCState extends State<FloatButtonC> {
   late String? _commento;
   @override
   void initState() {
+    _commento = TextEditingController().text;
     _controller = TextEditingController();
     super.initState();
   }
@@ -51,10 +52,10 @@ class _FloatButtonCState extends State<FloatButtonC> {
                               icon: const Icon(Icons.close)),
                           IconButton(
                               onPressed: () async {
-                                if (_commento == null || _commento!.isEmpty) {
+                                if (_commento!.isEmpty || _commento == null) {
                                   Navigator.of(context).pop();
                                 } else {
-                                  ApiComment.addCommentTo(
+                                  await ApiComment.addCommentTo(
                                       widget.postId, _commento!);
                                   Navigator.of(context)
                                       .pop(widget.callback(true));
