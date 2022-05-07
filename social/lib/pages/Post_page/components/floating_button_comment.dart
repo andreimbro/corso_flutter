@@ -28,18 +28,31 @@ class _FloatButtonCState extends State<FloatButtonC> {
       onPressed: () {
         showModalBottomSheet(
             isScrollControlled: true,
+            elevation: 5,
             context: context,
             builder: (context) => Padding(
                   padding: EdgeInsets.only(
+                      top: 20,
+                      left: 20,
+                      right: 20,
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextField(
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            hintText: "Inserisci un commento",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
                           controller: _controller,
                           onChanged: (value) {
                             _commento = _controller.text;
                           }),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -63,7 +76,10 @@ class _FloatButtonCState extends State<FloatButtonC> {
                               },
                               icon: const Icon(Icons.send)),
                         ],
-                      )
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ));

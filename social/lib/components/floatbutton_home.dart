@@ -37,27 +37,64 @@ class _FloaatButtonHomeState extends State<FloaatButtonHome> {
             builder: (context) {
               return Padding(
                 padding: EdgeInsets.only(
-                    left: 20,
-                    right: 20,
+                    top: 20,
+                    left: 40,
+                    right: 40,
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Crea il tuo Post",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                              color: Colors.blue),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     TextField(
+                      decoration: InputDecoration(
+                        labelText: "Descrizione",
+                        hintText: "Inserisci una descrizione",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                       controller: _controllerText,
                       onChanged: (value) {
                         _text = _controllerText.text;
                       },
                     ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Card(
                       child: Image.network(
                           'https://www.legadelcane.org/wp-content/uploads/puppy-1903313_1920-1080x675.jpg'),
                     ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     TextField(
+                        decoration: InputDecoration(
+                          labelText: "Tag",
+                          hintText: "Inserisci i tuoi tag",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
                         controller: _controllerTag,
                         onChanged: (value) {
                           _tag = _controllerTag.text;
                         }),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
