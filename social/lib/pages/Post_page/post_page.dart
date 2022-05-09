@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social/pages/Post_page/components/button_postmod.dart';
 
 import '../../models/post.dart';
 import 'components/body_page_post.dart';
@@ -6,7 +7,9 @@ import 'components/floating_button_comment.dart';
 
 class PostPage extends StatefulWidget {
   final Post post;
-  const PostPage(this.post, {Key? key}) : super(key: key);
+  final String idLogUser;
+  const PostPage(this.post, {required this.idLogUser, Key? key})
+      : super(key: key);
 
   @override
   State<PostPage> createState() => _PostPageState();
@@ -35,7 +38,7 @@ class _PostPageState extends State<PostPage> {
       floatingActionButton:
           FloatButtonC(callback: refresh, postId: widget.post.id ?? ""),
       appBar: AppBar(),
-      body: BodyPagePost(widget.post),
+      body: BodyPagePost(idLogUser: widget.idLogUser, widget.post),
     );
   }
 }

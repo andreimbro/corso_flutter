@@ -5,15 +5,17 @@ import 'package:social/pages/Post_page/components/lista_commenti.dart';
 import '../../../models/post.dart';
 
 class BodyPagePost extends StatelessWidget {
+  final String idLogUser;
   final Post post;
-  const BodyPagePost(this.post, {Key? key}) : super(key: key);
+  const BodyPagePost(this.post, {required this.idLogUser, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
       children: [
-        CardPost(post: post),
+        CardPost(idLogUser: idLogUser, post: post),
         ListaCommenti(post.id!),
       ],
     );

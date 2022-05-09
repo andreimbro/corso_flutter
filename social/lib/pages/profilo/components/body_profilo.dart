@@ -7,7 +7,9 @@ import '../../../models/user.dart';
 
 class BodyProfilo extends StatelessWidget {
   final Future<User> future;
-  const BodyProfilo(this.future, {Key? key}) : super(key: key);
+  final String idLogUser;
+  const BodyProfilo(this.future, {required this.idLogUser, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class BodyProfilo extends StatelessWidget {
               const Divider(),
               Expanded(
                   child: BodyHome(
+                idLogUser: idLogUser,
                 iduser: user.id,
                 profilo: true,
               )),

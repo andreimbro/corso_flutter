@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/profilo/profilo.dart';
 
 class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBAr({Key? key}) : super(key: key);
+  final String idLogUser;
+  const CustomAppBAr(this.idLogUser, {Key? key}) : super(key: key);
   @override
   Size get preferredSize => const Size.fromHeight(60);
   @override
@@ -16,7 +17,8 @@ class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
               SharedPreferences sp = await SharedPreferences.getInstance();
               var iduser = sp.getString('logKey');
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return Profilo(iduser ?? "user not found");
+                return Profilo(
+                    idLogUser: idLogUser, iduser ?? "user not found");
               }));
             },
             icon: const Icon(Icons.person))

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:social/components/button_like.dart';
+import 'package:social/pages/Post_page/components/button_postmod.dart';
 import 'package:social/pages/Post_page/post_page.dart';
 
 import '../models/post.dart';
@@ -8,12 +9,22 @@ import 'package:social/models/global.dart' as global;
 
 import '../pages/profilo/profilo.dart';
 
-class CardPost extends StatelessWidget {
+class CardPost extends StatefulWidget {
   final Post post;
   final bool profilo;
-  const CardPost({required this.post, this.profilo = false, Key? key})
+  final String idLogUser;
+  const CardPost(
+      {required this.idLogUser,
+      required this.post,
+      this.profilo = false,
+      Key? key})
       : super(key: key);
 
+  @override
+  State<CardPost> createState() => _CardPostState();
+}
+
+class _CardPostState extends State<CardPost> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,28 +36,39 @@ class CardPost extends StatelessWidget {
       child: Column(children: [
         Padding(
           padding: const EdgeInsets.all(4),
-          child: InkWell(
-            onTap: (() {
-              if (profilo == false) {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return Profilo(post.owner.id ?? "user not found");
-                }));
-              }
-            }),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    NetworkImage(post.owner.picture ?? global.ImangeNotFound),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: (() {
+                    if (widget.profilo == false) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return Profilo(
+                            idLogUser: widget.idLogUser,
+                            widget.post.owner.id ?? "user not found");
+                      }));
+                    }
+                  }),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          widget.post.owner.picture ?? global.ImangeNotFound),
+                    ),
+                    title: Row(
+                      children: [
+                        Text(widget.post.owner.firstName),
+                        const SizedBox(width: 4),
+                        Text(widget.post.owner.lastName),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              title: Row(
-                children: [
-                  Text(post.owner.firstName),
-                  const SizedBox(width: 4),
-                  Text(post.owner.lastName),
-                ],
-              ),
-            ),
+              if (widget.post.owner.id == widget.idLogUser)
+                ButtonPostMod(widget.post),
+            ],
           ),
         ),
         Padding(
@@ -54,10 +76,10 @@ class CardPost extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              if (post.publishDate != null)
+              if (widget.post.publishDate != null)
                 Text(
                   DateFormat.yMMMMd('it_IT').add_Hm().format(
-                        DateTime.parse(post.publishDate!),
+                        DateTime.parse(widget.post.publishDate!),
                       ),
                   textAlign: TextAlign.end,
                   style: const TextStyle(
@@ -68,32 +90,28 @@ class CardPost extends StatelessWidget {
             ],
           ),
         ),
-        Image.network(post.image),
+        Image.network(widget.post.image),
         Wrap(
-            children: post.tags
+            children: widget.post.tags
                 .map((item) => Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Chip(label: Text(item)),
                     ))
                 .toList()),
-        Row(
-          children: [
-            const SizedBox(width: 20),
-            Wrap(
-              children: [Text(post.text)],
-            ),
-          ],
+        const SizedBox(width: 20),
+        Wrap(
+          children: [Text(widget.post.text)],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Row(
             children: [
-              LikeButton(post),
+              LikeButton(widget.post),
               TextButton.icon(
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return PostPage(post);
+                    return PostPage(idLogUser: widget.idLogUser, widget.post);
                   }));
                 },
                 icon: const Icon(Icons.comment_bank_outlined),

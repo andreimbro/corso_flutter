@@ -7,8 +7,10 @@ import '../../../models/post_response.dart';
 
 class BodyHome extends StatefulWidget {
   final String? iduser;
+  final String idLogUser;
   final bool profilo;
-  const BodyHome({this.iduser, this.profilo = false, Key? key})
+  const BodyHome(
+      {required this.idLogUser, this.iduser, this.profilo = false, Key? key})
       : super(key: key);
 
   @override
@@ -77,13 +79,16 @@ class _BodyHomeState extends State<BodyHome> {
 
                       return Column(
                         children: [
-                          CardPost(post: listPost[index]),
+                          CardPost(
+                              idLogUser: widget.idLogUser,
+                              post: listPost[index]),
                           if (index < _listPost.length)
                             const CircularProgressIndicator(),
                         ],
                       );
                     }
                     return CardPost(
+                      idLogUser: widget.idLogUser,
                       post: listPost[index],
                       profilo: widget.profilo,
                     );

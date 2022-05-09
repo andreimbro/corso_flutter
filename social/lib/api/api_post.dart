@@ -68,4 +68,30 @@ class ApiPost {
 
     throw Exception('Errore creazione fallita: ${response.body}');
   }
+
+  static Future<Post> modPost(Post post, String id) async {
+    Map<String, dynamic> jsonPost = post.toJson();
+    jsonPost.removeWhere((key, value) => value == null);
+
+    jsonPost.removeWhere((key, value) => key == "id");
+    jsonPost['owner'] = id;
+
+    if (post.id == null) {
+      Exception("Post non esiste");
+    }
+
+    final http.Response response = await http.put(
+        Uri.parse('$baseUrl/post/$id'),
+        headers: {
+          'app-id': '626fc933e000f6ac62f05f14',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(jsonPost));
+
+    if (response.statusCode == 200) {
+      return Post.fromJson(jsonDecode(response.body));
+    }
+
+    throw Exception('Errore modifica fallita: ${response.body}');
+  }
 }

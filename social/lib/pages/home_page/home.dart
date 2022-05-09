@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social/components/floatbutton_home.dart';
 import 'package:social/components/navigation_bar_c.dart';
 import 'package:social/pages/home_page/components/body_home.dart';
@@ -7,7 +6,8 @@ import 'package:social/components/custom_appbar.dart';
 import 'package:social/pages/home_page/components/drawer_custom.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final String idLogUser;
+  const Home(this.idLogUser, {Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -35,9 +35,11 @@ class _HomeState extends State<Home> {
         key: _key,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloaatButtonHome(refresh),
-        appBar: CustomAppBAr(),
-        drawer: DrawerCustom(),
-        body: BodyHome(),
-        bottomNavigationBar: NavigationBarC());
+        appBar: CustomAppBAr(widget.idLogUser),
+        drawer: const DrawerCustom(),
+        body: BodyHome(
+          idLogUser: widget.idLogUser,
+        ),
+        bottomNavigationBar: const NavigationBarC());
   }
 }

@@ -16,9 +16,9 @@ class LogInCard extends StatelessWidget {
         SharedPreferences sp = await SharedPreferences.getInstance();
 
         sp.setString('logKey', user.id!);
-
+        String idUser = sp.getString('logKey') ?? "";
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const Home();
+          return Home(idUser);
         }));
       },
       child: Padding(

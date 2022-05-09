@@ -6,7 +6,9 @@ import '../../models/user.dart';
 
 class Profilo extends StatefulWidget {
   final String iduser;
-  const Profilo(this.iduser, {Key? key}) : super(key: key);
+  final String idLogUser;
+  const Profilo(this.iduser, {required this.idLogUser, Key? key})
+      : super(key: key);
 
   @override
   State<Profilo> createState() => _ProfiloState();
@@ -35,6 +37,9 @@ class _ProfiloState extends State<Profilo> {
         appBar: AppBar(
           elevation: 0,
         ),
-        body: BodyProfilo(_future));
+        body: BodyProfilo(
+          _future,
+          idLogUser: widget.idLogUser,
+        ));
   }
 }
