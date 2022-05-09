@@ -8,7 +8,9 @@ import '../../../models/user.dart';
 class BodyProfilo extends StatelessWidget {
   final Future<User> future;
   final String idLogUser;
-  const BodyProfilo(this.future, {required this.idLogUser, Key? key})
+  final Function refresh;
+  const BodyProfilo(this.future,
+      {required this.refresh, required this.idLogUser, Key? key})
       : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class BodyProfilo extends StatelessWidget {
               const Divider(),
               Expanded(
                   child: BodyHome(
+                refresh: refresh,
                 idLogUser: idLogUser,
                 iduser: user.id,
                 profilo: true,

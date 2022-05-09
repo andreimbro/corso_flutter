@@ -35,9 +35,10 @@ class _HomeState extends State<Home> {
         key: _key,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloaatButtonHome(refresh),
-        appBar: CustomAppBAr(widget.idLogUser),
+        appBar: CustomAppBAr(refresh: refresh, widget.idLogUser),
         drawer: const DrawerCustom(),
         body: BodyHome(
+          refresh: refresh,
           idLogUser: widget.idLogUser,
         ),
         bottomNavigationBar: const NavigationBarC());

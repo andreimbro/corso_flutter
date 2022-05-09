@@ -5,7 +5,9 @@ import '../pages/profilo/profilo.dart';
 
 class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
   final String idLogUser;
-  const CustomAppBAr(this.idLogUser, {Key? key}) : super(key: key);
+  final Function refresh;
+  const CustomAppBAr(this.idLogUser, {required this.refresh, Key? key})
+      : super(key: key);
   @override
   Size get preferredSize => const Size.fromHeight(60);
   @override
@@ -18,7 +20,9 @@ class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
               var iduser = sp.getString('logKey');
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return Profilo(
-                    idLogUser: idLogUser, iduser ?? "user not found");
+                    refresh: refresh,
+                    idLogUser: idLogUser,
+                    iduser ?? "user not found");
               }));
             },
             icon: const Icon(Icons.person))

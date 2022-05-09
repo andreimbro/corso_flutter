@@ -38,7 +38,8 @@ class _PostPageState extends State<PostPage> {
       floatingActionButton:
           FloatButtonC(callback: refresh, postId: widget.post.id ?? ""),
       appBar: AppBar(),
-      body: BodyPagePost(idLogUser: widget.idLogUser, widget.post),
+      body: BodyPagePost(
+          refresh: refresh, idLogUser: widget.idLogUser, widget.post),
     );
   }
 }

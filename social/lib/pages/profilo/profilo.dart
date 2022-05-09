@@ -7,7 +7,9 @@ import '../../models/user.dart';
 class Profilo extends StatefulWidget {
   final String iduser;
   final String idLogUser;
-  const Profilo(this.iduser, {required this.idLogUser, Key? key})
+  final Function refresh;
+  const Profilo(this.iduser,
+      {required this.refresh, required this.idLogUser, Key? key})
       : super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class _ProfiloState extends State<Profilo> {
           elevation: 0,
         ),
         body: BodyProfilo(
+          refresh: widget.refresh,
           _future,
           idLogUser: widget.idLogUser,
         ));

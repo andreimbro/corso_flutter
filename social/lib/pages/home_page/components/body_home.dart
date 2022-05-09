@@ -9,8 +9,13 @@ class BodyHome extends StatefulWidget {
   final String? iduser;
   final String idLogUser;
   final bool profilo;
+  final Function refresh;
   const BodyHome(
-      {required this.idLogUser, this.iduser, this.profilo = false, Key? key})
+      {required this.idLogUser,
+      this.iduser,
+      this.profilo = false,
+      required this.refresh,
+      Key? key})
       : super(key: key);
 
   @override
@@ -80,6 +85,7 @@ class _BodyHomeState extends State<BodyHome> {
                       return Column(
                         children: [
                           CardPost(
+                              refresh: widget.refresh,
                               idLogUser: widget.idLogUser,
                               post: listPost[index]),
                           if (index < _listPost.length)
@@ -88,6 +94,7 @@ class _BodyHomeState extends State<BodyHome> {
                       );
                     }
                     return CardPost(
+                      refresh: widget.refresh,
                       idLogUser: widget.idLogUser,
                       post: listPost[index],
                       profilo: widget.profilo,

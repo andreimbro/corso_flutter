@@ -7,7 +7,9 @@ import '../../../models/post.dart';
 class BodyPagePost extends StatelessWidget {
   final String idLogUser;
   final Post post;
-  const BodyPagePost(this.post, {required this.idLogUser, Key? key})
+  final Function refresh;
+  const BodyPagePost(this.post,
+      {required this.refresh, required this.idLogUser, Key? key})
       : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class BodyPagePost extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: [
-        CardPost(idLogUser: idLogUser, post: post),
+        CardPost(refresh: refresh, idLogUser: idLogUser, post: post),
         ListaCommenti(post.id!),
       ],
     );

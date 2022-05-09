@@ -13,9 +13,11 @@ class CardPost extends StatefulWidget {
   final Post post;
   final bool profilo;
   final String idLogUser;
+  final Function refresh;
   const CardPost(
       {required this.idLogUser,
       required this.post,
+      required this.refresh,
       this.profilo = false,
       Key? key})
       : super(key: key);
@@ -46,6 +48,7 @@ class _CardPostState extends State<CardPost> {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return Profilo(
+                            refresh: widget.refresh,
                             idLogUser: widget.idLogUser,
                             widget.post.owner.id ?? "user not found");
                       }));
@@ -67,7 +70,7 @@ class _CardPostState extends State<CardPost> {
                 ),
               ),
               if (widget.post.owner.id == widget.idLogUser)
-                ButtonPostMod(widget.post),
+                ButtonPostMod(widget.refresh, widget.post),
             ],
           ),
         ),
