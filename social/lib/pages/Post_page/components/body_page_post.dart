@@ -17,7 +17,11 @@ class BodyPagePost extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: [
-        CardPost(refresh: refresh, idLogUser: idLogUser, post: post),
+        CardPost(
+            refresh: refresh,
+            idLogUser: idLogUser,
+            post: post,
+            iconComment: false),
         ListaCommenti(post.id!),
       ],
     );

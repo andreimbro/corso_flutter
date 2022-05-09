@@ -14,10 +14,12 @@ class CardPost extends StatefulWidget {
   final bool profilo;
   final String idLogUser;
   final Function refresh;
+  final bool iconComment;
   const CardPost(
       {required this.idLogUser,
       required this.post,
       required this.refresh,
+      this.iconComment = true,
       this.profilo = false,
       Key? key})
       : super(key: key);
@@ -117,7 +119,9 @@ class _CardPostState extends State<CardPost> {
                     return PostPage(idLogUser: widget.idLogUser, widget.post);
                   }));
                 },
-                icon: const Icon(Icons.comment_bank_outlined),
+                icon: Visibility(
+                    visible: widget.iconComment,
+                    child: const Icon(Icons.comment_bank_outlined)),
                 label: const Text(""),
               )
             ],
