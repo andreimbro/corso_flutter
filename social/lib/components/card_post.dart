@@ -59,7 +59,7 @@ class _CardPostState extends State<CardPost> {
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(
-                          widget.post.owner.picture ?? global.ImangeNotFound),
+                          widget.post.owner.picture ?? global.imangeNotFound),
                     ),
                     title: Row(
                       children: [

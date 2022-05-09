@@ -15,7 +15,7 @@ class _FloaatButtonHomeState extends State<FloaatButtonHome> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () async {
-        var create = await showModalBottomSheet(
+        await showModalBottomSheet(
             isScrollControlled: true,
             context: context,
             builder: (context) {

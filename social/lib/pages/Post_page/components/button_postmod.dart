@@ -11,7 +11,7 @@ class ButtonPostMod extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () async {
-        var create = await showModalBottomSheet(
+        await showModalBottomSheet(
             isScrollControlled: true,
             context: context,
             builder: (context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:social/pages/Post_page/components/button_postmod.dart';
 
 import '../../models/post.dart';
 import 'components/body_page_post.dart';

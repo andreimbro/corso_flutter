@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:viaggi/components/custom_appbar.dart';
 import 'package:viaggi/components/drawer_c.dart';
-import 'package:viaggi/components/list_catego.dart';
 import 'package:viaggi/components/list_mete.dart';
 import 'package:viaggi/components/search_bar.dart';
 import 'package:viaggi/components/tasto_op.dart';

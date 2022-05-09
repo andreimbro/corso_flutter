@@ -8,19 +8,11 @@ class NavigationBarC extends StatefulWidget {
 }
 
 class _NavigationBarCState extends State<NavigationBarC> {
-  //late int _index;
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        // currentIndex: _index,
-        // onTap: (index) {
-        //   setState(() {
-        //     _index = index;
-        //   });
-        // },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "search")
-        ]);
+    return BottomNavigationBar(items: const [
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+      BottomNavigationBarItem(icon: Icon(Icons.search), label: "search")
+    ]);
   }
 }

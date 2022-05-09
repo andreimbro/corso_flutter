@@ -36,7 +36,7 @@ class LogInCard extends StatelessWidget {
               CircleAvatar(
                 radius: 40,
                 backgroundImage:
-                    NetworkImage(user.picture ?? global.ImangeNotFound),
+                    NetworkImage(user.picture ?? global.imangeNotFound),
               ),
               Padding(
                   padding: const EdgeInsets.all(20),

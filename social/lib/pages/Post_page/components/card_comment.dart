@@ -22,7 +22,7 @@ class CardComment extends StatelessWidget {
             child: CircleAvatar(
               radius: 30,
               backgroundImage: NetworkImage(
-                comment.owner.picture ?? global.ImangeNotFound,
+                comment.owner.picture ?? global.imangeNotFound,
               ),
             ),
           ),

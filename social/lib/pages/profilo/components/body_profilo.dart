@@ -40,7 +40,7 @@ class BodyProfilo extends StatelessWidget {
                   child: CircleAvatar(
                       radius: 74,
                       backgroundImage:
-                          NetworkImage(user.picture ?? global.ImangeNotFound)),
+                          NetworkImage(user.picture ?? global.imangeNotFound)),
                 ),
               )),
               const SizedBox(

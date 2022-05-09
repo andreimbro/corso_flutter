@@ -22,7 +22,6 @@ class ApiUser {
   static Future<User> getDetails(String id) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$id'),
         headers: {'app-id': '626fc933e000f6ac62f05f14'});
-    print(response.body);
     if (response.statusCode == 200) {
       return User.fromJson(jsonDecode(response.body));
     }

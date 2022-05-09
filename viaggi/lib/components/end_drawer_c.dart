@@ -57,9 +57,7 @@ class _EndDrawerCState extends State<EndDrawerC> {
 
   void callbackCategorie(Interessi categorie) {
     setState(() {
-      if (categorie == null) {
-        _categorieSelezionate = [];
-      } else if (_categorieSelezionate.contains(categorie)) {
+      if (_categorieSelezionate.contains(categorie)) {
         _categorieSelezionate.remove(categorie);
       } else {
         _categorieSelezionate.add(categorie);
