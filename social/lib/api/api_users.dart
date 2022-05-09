@@ -28,4 +28,30 @@ class ApiUser {
     throw Exception(
         'Errore in ricevere i dettagli dell utente ${response.body}');
   }
+
+  static Future<User> modUser(User user, String id) async {
+    Map<String, dynamic> jsonPost = user.toJson();
+    jsonPost.removeWhere((key, value) => value == null);
+    jsonPost['owner'] = id;
+
+    jsonPost.removeWhere((key, value) => key == "id");
+
+    if (user.id == null) {
+      Exception("User non esiste");
+    }
+
+    final http.Response response = await http.put(
+        Uri.parse('$baseUrl/user/$id'),
+        headers: {
+          'app-id': '626fc933e000f6ac62f05f14',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(jsonPost));
+
+    if (response.statusCode == 200) {
+      return User.fromJson(jsonDecode(response.body));
+    }
+
+    throw Exception('Errore modifica fallita: ${response.body}');
+  }
 }

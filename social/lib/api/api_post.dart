@@ -72,9 +72,9 @@ class ApiPost {
   static Future<Post> modPost(Post post, String id) async {
     Map<String, dynamic> jsonPost = post.toJson();
     jsonPost.removeWhere((key, value) => value == null);
+    jsonPost['owner'] = id;
 
     jsonPost.removeWhere((key, value) => key == "id");
-    jsonPost['owner'] = id;
 
     if (post.id == null) {
       Exception("Post non esiste");

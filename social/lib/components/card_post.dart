@@ -111,7 +111,7 @@ class _CardPostState extends State<CardPost> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Row(
             children: [
-              LikeButton(widget.post),
+              LikeButton(widget.post, userLogId: widget.idLogUser),
               TextButton.icon(
                 onPressed: () {
                   Navigator.of(context)

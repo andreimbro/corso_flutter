@@ -131,7 +131,7 @@ class _PostDialogState extends State<PostDialog> {
                             image: widget.post!.image,
                             text: _text ?? "",
                             tags: _tag?.split(', ') ?? []);
-                        ApiPost.modPost(modpost, widget.post!.id ?? "");
+                        await ApiPost.modPost(modpost, widget.post!.id ?? "");
                       } else {
                         _post = Post(
                             likes: 0,
