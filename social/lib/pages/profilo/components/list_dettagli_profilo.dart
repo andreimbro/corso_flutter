@@ -105,6 +105,7 @@ class _ListProfDettState extends State<ListProfDett> {
                   : ListTile(
                       leading: Icon(
                         widget.user.gender == "female" ? Icons.girl : Icons.boy,
+                        size: 30,
                       ),
                       title: Text(widget.user.gender ?? "not found"),
                     ),
