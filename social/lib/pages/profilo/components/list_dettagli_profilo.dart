@@ -71,6 +71,8 @@ class _ListProfDettState extends State<ListProfDett> {
                           Expanded(
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
+                                icon:
+                                    const Icon(Icons.app_registration_outlined),
                                 isDense: true,
                                 value: _gender,
                                 items: const [
@@ -83,16 +85,17 @@ class _ListProfDettState extends State<ListProfDett> {
                                     child: Text('Female'),
                                   )
                                 ],
-                                onChanged: (item) {
-                                  setState(() async {
+                                onChanged: (item) async {
+                                  setState(() {
                                     _gender = item;
-                                    await ApiUser.modUser(
-                                        User(
-                                            firstName: widget.user.firstName,
-                                            lastName: widget.user.lastName,
-                                            gender: item),
-                                        widget.idLogUser ?? "");
                                   });
+
+                                  await ApiUser.modUser(
+                                      User(
+                                          firstName: widget.user.firstName,
+                                          lastName: widget.user.lastName,
+                                          gender: item),
+                                      widget.idLogUser ?? "");
                                 },
                               ),
                             ),
