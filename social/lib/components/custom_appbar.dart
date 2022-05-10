@@ -16,6 +16,7 @@ class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
             onPressed: () async {
               SharedPreferences sp = await SharedPreferences.getInstance();
               var iduser = sp.getString('logKey');
+              // ignore: use_build_context_synchronously
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return Profilo(
                   iduser ?? "user not found",

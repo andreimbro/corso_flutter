@@ -116,6 +116,7 @@ class _PostDialogState extends State<PostDialog> {
                   child: TextButton(
                     onPressed: () async {
                       await ApiPost.deletePost(widget.post?.id ?? "");
+                      if (!mounted) return;
                       Navigator.of(context).pop(widget.callback(true));
                     },
                     style: ButtonStyle(
@@ -157,6 +158,7 @@ class _PostDialogState extends State<PostDialog> {
 
                         await ApiPost.addPostById(_post);
                       }
+                      if (!mounted) return;
                       Navigator.of(context).pop(widget.callback(true));
                     },
                     icon: const Icon(Icons.send))

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DrawerCustom extends StatelessWidget {
+class DrawerCustom extends StatefulWidget {
   const DrawerCustom({Key? key}) : super(key: key);
 
+  @override
+  State<DrawerCustom> createState() => _DrawerCustomState();
+}
+
+class _DrawerCustomState extends State<DrawerCustom> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -14,6 +19,7 @@ class DrawerCustom extends StatelessWidget {
           onTap: () async {
             SharedPreferences sp = await SharedPreferences.getInstance();
             sp.remove('logKey');
+            if (!mounted) return;
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
           }),

@@ -70,6 +70,7 @@ class _FloatButtonCState extends State<FloatButtonC> {
                                 } else {
                                   await ApiComment.addCommentTo(
                                       widget.postId, _commento!);
+                                  if (!mounted) return;
                                   Navigator.of(context)
                                       .pop(widget.callback(true));
                                 }
