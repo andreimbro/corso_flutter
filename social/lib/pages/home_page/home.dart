@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
   }
 
   int _currentPage = 0;
-  var _controller = PageController(
+  var controller = PageController(
     initialPage: -1,
     keepPage: true,
   );
@@ -44,8 +44,8 @@ class _HomeState extends State<Home> {
   void bottomTapped(int index) {
     setState(() {
       _currentPage = index;
-      _controller.animateToPage(index,
-          duration: Duration(milliseconds: 300), curve: Curves.ease);
+      controller.animateToPage(index,
+          duration: const Duration(milliseconds: 300), curve: Curves.ease);
     });
   }
 
@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
         ),
         drawer: const DrawerCustom(),
         body: PageView(
-            controller: _controller,
+            controller: controller,
             onPageChanged: (index) {
               pageChanged(index);
             },
