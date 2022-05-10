@@ -21,7 +21,6 @@ class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return Profilo(
                   iduser ?? "user not found",
-                  refresh: refresh,
                   idLogUser: idLogUser,
                 );
               }));

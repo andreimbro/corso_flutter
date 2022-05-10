@@ -51,7 +51,6 @@ class _CardPostState extends State<CardPost> {
                           .push(MaterialPageRoute(builder: (context) {
                         return Profilo(
                           widget.post.owner.id ?? "user not found",
-                          refresh: widget.refresh,
                           idLogUser: widget.idLogUser,
                         );
                       }));

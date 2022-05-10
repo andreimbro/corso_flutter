@@ -7,9 +7,7 @@ import '../../models/user.dart';
 class Profilo extends StatefulWidget {
   final String iduser;
   final String idLogUser;
-  final Function refresh;
-  const Profilo(this.iduser,
-      {required this.refresh, required this.idLogUser, Key? key})
+  const Profilo(this.iduser, {required this.idLogUser, Key? key})
       : super(key: key);
 
   @override
@@ -18,13 +16,23 @@ class Profilo extends StatefulWidget {
 
 class _ProfiloState extends State<Profilo> {
   late Future<User> _future;
+  late UniqueKey _key;
 
   Future<User> _fetchUser(String id) async {
     return ApiUser.getDetails(id);
   }
 
   void initvariabili() {
+    _key = UniqueKey();
     _future = _fetchUser(widget.iduser);
+  }
+
+  void refresh(bool pop) {
+    if (pop == true) {
+      setState(() {
+        _key = UniqueKey();
+      });
+    }
   }
 
   @override
@@ -36,12 +44,13 @@ class _ProfiloState extends State<Profilo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _key,
         appBar: AppBar(
           elevation: 0,
         ),
         body: BodyProfilo(
           _future,
-          refresh: widget.refresh,
+          refresh: refresh,
           idLogUser: widget.idLogUser,
         ));
   }

@@ -138,9 +138,7 @@ class _PostDialogState extends State<PostDialog> {
                               "https://randomuser.me/api/portraits/women/58.jpg",
                           email: "ciao@gmail.com");
 
-                      if (_controllerText.text.isNotEmpty ||
-                          _controllerTag.text.isNotEmpty ||
-                          widget.post != null) {
+                      if (widget.post != null) {
                         final modpost = Post(
                             likes: widget.post!.likes,
                             owner: provauser,
@@ -155,7 +153,7 @@ class _PostDialogState extends State<PostDialog> {
                             image:
                                 'https://www.legadelcane.org/wp-content/uploads/puppy-1903313_1920-1080x675.jpg',
                             text: _text ?? "",
-                            tags: _tag?.split(', ') ?? []);
+                            tags: _tag?.split(' ') ?? []);
 
                         await ApiPost.addPostById(_post);
                       }
