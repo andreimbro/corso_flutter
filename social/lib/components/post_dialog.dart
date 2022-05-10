@@ -25,12 +25,15 @@ class _PostDialogState extends State<PostDialog> {
   void initState() {
     _controllerText = TextEditingController(
         text: widget.post != null ? widget.post!.text : "");
-    _controllerTag = TextEditingController(
-        text: widget.post != null
-            ? widget.post!.tags
-                .toString()
-                .substring(1, widget.post!.tags.toString().length - 1)
-            : "");
+    if (widget.post != null) {
+      _controllerTag = TextEditingController(
+          text: widget.post!.tags
+              .toString()
+              .substring(1, widget.post!.tags.toString().length - 1));
+    } else {
+      _controllerTag = TextEditingController();
+    }
+
     _text = _controllerText.text;
     _tag = _controllerTag.text;
     super.initState();
