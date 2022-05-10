@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NavigationBarC extends StatelessWidget {
-  final currentPage;
+  final int currentPage;
   final Function bottomTapped;
   const NavigationBarC(this.currentPage, this.bottomTapped, {Key? key})
       : super(key: key);

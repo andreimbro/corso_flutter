@@ -79,10 +79,10 @@ class _CardCommentState extends State<CardComment> {
                       Text(widget.comment.message),
                       IconButton(
                           onPressed: () async {
-                            final _delete = await ApiComment.deleteComment(
+                            final cancella = await ApiComment.deleteComment(
                                 widget.comment.id!);
                             setState(() {
-                              delete = _delete;
+                              delete = cancella;
                             });
                           },
                           icon: Icon(
