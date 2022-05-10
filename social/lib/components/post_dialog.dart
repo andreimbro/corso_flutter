@@ -111,6 +111,22 @@ class _PostDialogState extends State<PostDialog> {
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.close)),
+                Visibility(
+                  visible: widget.post != null,
+                  child: TextButton(
+                    onPressed: () async {
+                      await ApiPost.deletePost(widget.post?.id ?? "");
+                      Navigator.of(context).pop(widget.callback(true));
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red)),
+                    child: const Text(
+                      "Ellimina",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
                 IconButton(
                     onPressed: () async {
                       const provauser = User(
@@ -147,7 +163,10 @@ class _PostDialogState extends State<PostDialog> {
                     },
                     icon: const Icon(Icons.send))
               ],
-            )
+            ),
+            const SizedBox(
+              height: 15,
+            ),
           ],
         ),
       ),

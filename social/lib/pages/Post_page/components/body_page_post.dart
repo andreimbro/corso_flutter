@@ -22,7 +22,8 @@ class BodyPagePost extends StatelessWidget {
             idLogUser: idLogUser,
             post: post,
             iconComment: false),
-        ListaCommenti(post.id!),
+        ListaCommenti(post.id!,
+            idLogUser: idLogUser, idUserPost: post.owner.id ?? ""),
       ],
     );
   }

@@ -94,4 +94,17 @@ class ApiPost {
 
     throw Exception('Errore modifica fallita: ${response.body}');
   }
+
+  static Future<bool> deletePost(String idPost) async {
+    final response =
+        await http.delete(Uri.parse('$baseUrl/post/$idPost'), headers: {
+      'app-id': '626fc933e000f6ac62f05f14',
+    });
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    throw Exception('Errore impossibile elliminare il commento:'
+        '${response.body} ');
+  }
 }

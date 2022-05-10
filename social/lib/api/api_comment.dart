@@ -71,4 +71,17 @@ class ApiComment {
 
     throw Exception('Errore invio commento: ${response.body}');
   }
+
+  static Future<bool> deleteComment(String idComment) async {
+    final response =
+        await http.delete(Uri.parse('$baseUrl/comment/$idComment'), headers: {
+      'app-id': '626fc933e000f6ac62f05f14',
+    });
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    throw Exception('Errore impossibile elliminare il commento:'
+        '${response.body} ');
+  }
 }

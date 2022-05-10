@@ -6,7 +6,11 @@ import 'package:social/pages/Post_page/components/card_comment.dart';
 
 class ListaCommenti extends StatefulWidget {
   final String idPost;
-  const ListaCommenti(this.idPost, {Key? key}) : super(key: key);
+  final String idUserPost;
+  final String idLogUser;
+  const ListaCommenti(this.idPost,
+      {required this.idLogUser, required this.idUserPost, Key? key})
+      : super(key: key);
 
   @override
   State<ListaCommenti> createState() => _ListaCommentiState();
@@ -69,14 +73,30 @@ class _ListaCommentiState extends State<ListaCommenti> {
 
                       return Column(
                         children: [
-                          CardComment(listComment[index]),
+                          CardComment(
+                            listComment[index],
+                            idLogUser: widget.idLogUser,
+                            idUserPost: widget.idUserPost,
+                          ),
                           if (index < _listComment.length)
                             const CircularProgressIndicator(),
                         ],
                       );
                     }
-                    return CardComment(
-                      listComment[index],
+                    return Column(
+                      children: [
+                        CardComment(
+                          listComment[index],
+                          idLogUser: widget.idLogUser,
+                          idUserPost: widget.idUserPost,
+                        ),
+                        Visibility(
+                          visible: index == _listComment.length - 1,
+                          child: const SizedBox(
+                            height: 70,
+                          ),
+                        ),
+                      ],
                     );
                   });
             }
