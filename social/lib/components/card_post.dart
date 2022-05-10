@@ -74,6 +74,9 @@ class _CardPostState extends State<CardPost> {
               ),
               if (widget.post.owner.id == widget.idLogUser)
                 ButtonPostMod(widget.refresh, widget.post),
+              const SizedBox(
+                width: 16,
+              ),
             ],
           ),
         ),
