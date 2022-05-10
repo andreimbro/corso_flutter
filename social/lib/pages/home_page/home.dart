@@ -29,6 +29,26 @@ class _HomeState extends State<Home> {
     }
   }
 
+  int _currentPage = 0;
+  var _controller = PageController(
+    initialPage: -1,
+    keepPage: true,
+  );
+
+  void pageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      _currentPage = index;
+      _controller.animateToPage(index,
+          duration: Duration(milliseconds: 300), curve: Curves.ease);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +57,32 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloaatButtonHome(refresh),
         appBar: CustomAppBAr(
           widget.idLogUser,
-          refresh: refresh,
         ),
         drawer: const DrawerCustom(),
-        body: BodyHome(
-          refresh: refresh,
-          idLogUser: widget.idLogUser,
-        ),
-        bottomNavigationBar: const NavigationBarC());
+        body: PageView(
+            controller: _controller,
+            onPageChanged: (index) {
+              pageChanged(index);
+            },
+            children: [
+              BodyHome(
+                refresh: refresh,
+                idLogUser: widget.idLogUser,
+              ),
+              Container(
+                color: Colors.blue,
+                child: const Center(
+                  child: Text(
+                    "Questa è una pagina di prova",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                    ),
+                  ),
+                ),
+              )
+            ]),
+        bottomNavigationBar: NavigationBarC(_currentPage, bottomTapped));
   }
 }

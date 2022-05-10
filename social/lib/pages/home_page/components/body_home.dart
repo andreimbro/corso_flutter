@@ -42,13 +42,14 @@ class _BodyHomeState extends State<BodyHome> {
     } else {
       result = await ApiPost.getPostList(page: _page);
     }
-
-    setState(() {
-      _skipPost = _skipPost + result.limit;
-      _hasMorePost = (result.total - _skipPost) > 0;
-      _listPost = _listPost + result.data;
-      _page++;
-    });
+    if (mounted) {
+      setState(() {
+        _skipPost = _skipPost + result.limit;
+        _hasMorePost = (result.total - _skipPost) > 0;
+        _listPost = _listPost + result.data;
+        _page++;
+      });
+    }
 
     return _listPost;
   }

@@ -5,9 +5,7 @@ import '../pages/profilo/profilo.dart';
 
 class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
   final String idLogUser;
-  final Function refresh;
-  const CustomAppBAr(this.idLogUser, {required this.refresh, Key? key})
-      : super(key: key);
+  const CustomAppBAr(this.idLogUser, {Key? key}) : super(key: key);
   @override
   Size get preferredSize => const Size.fromHeight(60);
   @override
