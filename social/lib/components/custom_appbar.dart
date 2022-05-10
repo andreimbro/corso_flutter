@@ -20,9 +20,10 @@ class CustomAppBAr extends StatelessWidget with PreferredSizeWidget {
               var iduser = sp.getString('logKey');
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return Profilo(
-                    refresh: refresh,
-                    idLogUser: idLogUser,
-                    iduser ?? "user not found");
+                  iduser ?? "user not found",
+                  refresh: refresh,
+                  idLogUser: idLogUser,
+                );
               }));
             },
             icon: const Icon(Icons.person))

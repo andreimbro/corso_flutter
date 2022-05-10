@@ -50,9 +50,10 @@ class _CardPostState extends State<CardPost> {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return Profilo(
-                            refresh: widget.refresh,
-                            idLogUser: widget.idLogUser,
-                            widget.post.owner.id ?? "user not found");
+                          widget.post.owner.id ?? "user not found",
+                          refresh: widget.refresh,
+                          idLogUser: widget.idLogUser,
+                        );
                       }));
                     }
                   }),
@@ -116,7 +117,10 @@ class _CardPostState extends State<CardPost> {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return PostPage(idLogUser: widget.idLogUser, widget.post);
+                    return PostPage(
+                      widget.post,
+                      idLogUser: widget.idLogUser,
+                    );
                   }));
                 },
                 icon: Visibility(

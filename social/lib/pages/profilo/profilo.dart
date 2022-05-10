@@ -40,8 +40,8 @@ class _ProfiloState extends State<Profilo> {
           elevation: 0,
         ),
         body: BodyProfilo(
-          refresh: widget.refresh,
           _future,
+          refresh: widget.refresh,
           idLogUser: widget.idLogUser,
         ));
   }

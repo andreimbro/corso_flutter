@@ -15,6 +15,7 @@ class ListProfDett extends StatefulWidget {
 class _ListProfDettState extends State<ListProfDett> {
   late bool isExpanded;
   String? _gender;
+
   @override
   void initState() {
     isExpanded = false;
@@ -61,9 +62,7 @@ class _ListProfDettState extends State<ListProfDett> {
                       child: Row(
                         children: [
                           Icon(
-                            widget.user.gender == "female"
-                                ? Icons.girl
-                                : Icons.boy,
+                            _gender == "female" ? Icons.girl : Icons.boy,
                             color: Colors.grey,
                             size: 38,
                           ),
