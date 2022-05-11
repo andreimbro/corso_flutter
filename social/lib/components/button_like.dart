@@ -25,11 +25,13 @@ class _LikeButtonState extends State<LikeButton> {
     SharedPreferences shareprefe = await SharedPreferences.getInstance();
     final listaLikes =
         shareprefe.getStringList("like_${widget.userLogId}") ?? [];
-    setState(() {
-      like = listaLikes.contains(widget.post.id);
-      _listaLikes = listaLikes;
-      _shareprefe = shareprefe;
-    });
+    if (mounted) {
+      setState(() {
+        like = listaLikes.contains(widget.post.id);
+        _listaLikes = listaLikes;
+        _shareprefe = shareprefe;
+      });
+    }
   }
 
   Future<void> aggiungipreferiti() async {
