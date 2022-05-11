@@ -99,16 +99,23 @@ class _CardPostState extends State<CardPost> {
           ),
         ),
         Image.network(widget.post.image),
-        Wrap(
-            children: widget.post.tags
-                .map((item) => Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Chip(label: Text(item)),
-                    ))
-                .toList()),
+        Visibility(
+          visible: widget.post.tags != [],
+          child: Wrap(
+              children: widget.post.tags
+                  .map((item) => Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Chip(label: Text(item)),
+                      ))
+                  .toList()),
+        ),
         const SizedBox(width: 20),
         Wrap(
-          children: [Text(widget.post.text)],
+          children: [
+            Visibility(
+                visible: widget.post.text.isNotEmpty,
+                child: Text(widget.post.text))
+          ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

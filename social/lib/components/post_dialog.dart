@@ -25,14 +25,10 @@ class _PostDialogState extends State<PostDialog> {
   void initState() {
     _controllerText = TextEditingController(
         text: widget.post != null ? widget.post!.text : "");
-    if (widget.post != null) {
-      _controllerTag = TextEditingController(
-          text: widget.post!.tags
-              .toString()
-              .substring(1, widget.post!.tags.toString().length - 1));
-    } else {
-      _controllerTag = TextEditingController();
-    }
+    String? tags = widget.post?.tags
+        .toString()
+        .substring(1, widget.post!.tags.toString().length - 1);
+    _controllerTag = TextEditingController(text: tags);
 
     _text = _controllerText.text;
     _tag = _controllerTag.text;
@@ -148,7 +144,7 @@ class _PostDialogState extends State<PostDialog> {
                             owner: provauser,
                             image: widget.post!.image,
                             text: _text ?? "",
-                            tags: _tag?.split(', ') ?? []);
+                            tags: _tag?.split(' ') ?? []);
                         await ApiPost.modPost(modpost, widget.post!.id ?? "");
                       } else {
                         _post = Post(
