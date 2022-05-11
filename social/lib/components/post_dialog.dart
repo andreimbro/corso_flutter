@@ -138,6 +138,10 @@ class _PostDialogState extends State<PostDialog> {
                               "https://randomuser.me/api/portraits/women/58.jpg",
                           email: "ciao@gmail.com");
 
+                      if (_tag?.isEmpty ?? false) {
+                        _tag = null;
+                      }
+
                       if (widget.post != null) {
                         final modpost = Post(
                             likes: widget.post!.likes,
