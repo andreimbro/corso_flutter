@@ -4,6 +4,7 @@ import 'package:social/models/post.dart';
 
 import '../api/api_post.dart';
 import '../models/user.dart';
+import 'package:social/models/global.dart' as global;
 
 class LikeButton extends StatefulWidget {
   final Post post;
@@ -20,7 +21,7 @@ class _LikeButtonState extends State<LikeButton> {
   late int _likenum;
   late List<String> _listaLikes;
   late SharedPreferences _shareprefe;
-
+  late User provauser;
   void initsharepref() async {
     SharedPreferences shareprefe = await SharedPreferences.getInstance();
     final listaLikes =
@@ -47,13 +48,7 @@ class _LikeButtonState extends State<LikeButton> {
         tags: widget.post.tags,
         image: widget.post.image,
         text: widget.post.text,
-        owner: const User(
-            id: "60d0fe4f5311236168a109ca",
-            title: "ms",
-            firstName: "Sara",
-            lastName: "Andersen",
-            picture: "https://randomuser.me/api/portraits/women/58.jpg",
-            email: "ciao@gmail.com"),
+        owner: provauser,
       ),
       widget.post.id!,
     );
@@ -74,13 +69,7 @@ class _LikeButtonState extends State<LikeButton> {
         tags: widget.post.tags,
         image: widget.post.image,
         text: widget.post.text,
-        owner: const User(
-            id: "60d0fe4f5311236168a109ca",
-            title: "ms",
-            firstName: "Sara",
-            lastName: "Andersen",
-            picture: "https://randomuser.me/api/portraits/women/58.jpg",
-            email: "ciao@gmail.com"),
+        owner: provauser,
       ),
       widget.post.id!,
     );
@@ -92,7 +81,7 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   void initState() {
     _likenum = widget.post.likes;
-
+    provauser = global.user[0];
     initsharepref();
 
     super.initState();

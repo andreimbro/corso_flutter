@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:social/pages/log_in/components/login_card.dart';
 
-import '../../../models/user.dart';
+import '../../../models/global.dart' as global;
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<User> user = const [
-      User(
-          id: "60d0fe4f5311236168a109ca",
-          title: "ms",
-          firstName: "Sara",
-          lastName: "Andersen",
-          picture: "https://randomuser.me/api/portraits/women/58.jpg",
-          email: "ciao@gmail.com"),
-      User(
-          id: "60d0fe4f5311236168a109cb",
-          title: "miss",
-          firstName: "Edita",
-          lastName: "Vestering",
-          picture: "https://randomuser.me/api/portraits/med/women/89.jpg",
-          email: "ciao@gmail.com")
-    ];
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -73,9 +56,9 @@ class BodyLogIn extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: user.length,
+                        itemCount: global.user.length,
                         itemBuilder: (context, index) =>
-                            LogInCard(user[index])),
+                            LogInCard(global.user[index])),
                   ),
                 ],
               ),

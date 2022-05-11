@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../api/api_post.dart';
 import '../models/post.dart';
+import '../models/global.dart' as global;
 import '../models/user.dart';
 
 class PostDialog extends StatefulWidget {
@@ -129,15 +130,7 @@ class _PostDialogState extends State<PostDialog> {
                 ),
                 IconButton(
                     onPressed: () async {
-                      const provauser = User(
-                          id: "60d0fe4f5311236168a109ca",
-                          title: "ms",
-                          firstName: "Sara",
-                          lastName: "Andersen",
-                          picture:
-                              "https://randomuser.me/api/portraits/women/58.jpg",
-                          email: "ciao@gmail.com");
-
+                      User provauser = global.user[0];
                       if (_tag?.isEmpty ?? false) {
                         _tag = null;
                       }
